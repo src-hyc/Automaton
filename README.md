@@ -27,11 +27,11 @@ using namespace Automaton;
 using namespace std;
 
 int main() {
-	DeterministicFiniteAutomaton::Symbol symbol;
+	Symbol symbol;
 	// a unary alphabet
-	unordered_set<const DeterministicFiniteAutomaton::Symbol *> unary({&symbol});
+	Alphabet unary({&symbol});
 	DeterministicFiniteAutomaton::State sEven, sOdd;
-	unordered_map<const DeterministicFiniteAutomaton::State *, unordered_map<const DeterministicFiniteAutomaton::Symbol *, const DeterministicFiniteAutomaton::State *>> transitionFunction(
+	unordered_map<const DeterministicFiniteAutomaton::State *, unordered_map<const Symbol *, const DeterministicFiniteAutomaton::State *>> transitionFunction(
 		{
 			{&sEven, {
 				{&symbol, &sOdd},
@@ -54,10 +54,10 @@ int main() {
 	DeterministicFiniteAutomaton evenAutomaton({&sEven, &sOdd}, unary, transitionFunction, &sEven, {&sEven});
 	// does the automaton accept a string of length 2
 	// outputs 1
-	cout << evenAutomaton.accept(basic_string<const DeterministicFiniteAutomaton::Symbol *>({&symbol, &symbol})) << endl;
+	cout << evenAutomaton.accept({&symbol, &symbol}) << endl;
 	// does the automaton accept a string of length 5
 	// outputs 0
-	cout << evenAutomaton.accept(basic_string<const DeterministicFiniteAutomaton::Symbol *>({&symbol, &symbol, &symbol, &symbol, &symbol})) << endl;
+	cout << evenAutomaton.accept({&symbol, &symbol, &symbol, &symbol, &symbol}) << endl;
 	return 0;
 }
 ```

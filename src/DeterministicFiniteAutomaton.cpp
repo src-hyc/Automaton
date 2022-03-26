@@ -11,7 +11,7 @@ using std::iterator;
 
 using std::invalid_argument;
 
-DeterministicFiniteAutomaton::DeterministicFiniteAutomaton(const unordered_set<const State *> &stateSet, const unordered_set<const Symbol *> &alphabet, const unordered_map<const State *, unordered_map<const Symbol *, const State *>> &transitionFunction, const State *initialState, const unordered_set<const State *> &acceptStateSet): stateSet(stateSet), alphabet(alphabet), transitionFunction(transitionFunction), acceptStateSet(acceptStateSet) {
+DeterministicFiniteAutomaton::DeterministicFiniteAutomaton(const unordered_set<const State *> &stateSet, const Alphabet &alphabet, const unordered_map<const State *, unordered_map<const Symbol *, const State *>> &transitionFunction, const State *initialState, const unordered_set<const State *> &acceptStateSet): VirtualAutomaton(alphabet), stateSet(stateSet), transitionFunction(transitionFunction), acceptStateSet(acceptStateSet) {
 	this->initialState = initialState;
 	// check whether {@code initialState} is not {@code NULL}
 	if (this->initialState == NULL) {
@@ -65,7 +65,7 @@ DeterministicFiniteAutomaton::DeterministicFiniteAutomaton(const unordered_set<c
 	}
 }
 
-bool DeterministicFiniteAutomaton::accept(const basic_string<const Symbol *> &string) const noexcept {
+bool DeterministicFiniteAutomaton::accept(const String &string) const noexcept {
 	int length = string.length();
 	// start from {@code initialState}
 	const State *tokenState = this->initialState;

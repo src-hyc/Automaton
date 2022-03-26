@@ -5,7 +5,7 @@ RANLIB= ranlib
 
 AUTOMATON_A= libautomaton.a
 
-AUTOMATON_O= DeterministicFiniteAutomaton.o
+AUTOMATON_O= VirtualAutomaton.o DeterministicFiniteAutomaton.o
 
 default: $(AUTOMATON_A)
 
@@ -13,7 +13,9 @@ $(AUTOMATON_A): $(AUTOMATON_O)
 	$(AR) $@ $?
 	$(RANLIB) $@
 
-DeterministicFiniteAutomaton.o: DeterministicFiniteAutomaton.hpp DeterministicFiniteAutomaton.cpp
+VirtualAutomaton.o: VirtualAutomaton.cpp Symbol.hpp
+
+DeterministicFiniteAutomaton.o: DeterministicFiniteAutomaton.cpp Symbol.hpp VirtualAutomaton.hpp
 
 clean:
 	rm -rf $(AUTOMATON_A) $(AUTOMATON_O)
