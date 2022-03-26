@@ -1,6 +1,73 @@
 # Automaton
 
-Automaton is a C++ library containing implementation of different types of automata.
+Automaton is a C++ library with implementation of different types of automata.
+
+## Installation
+
+Run the following commands in terminal to install Automaton.
+
+```bash
+git clone https://github.com/src-hyc/Automaton.git
+cd Automaton
+make && make install
+```
+
+## Usage
+
+Create a file `DFA_EvenLength.cpp` with content
+
+```cpp
+#include "DeterministicFiniteAutomaton.hpp"
+
+#include <unordered_set>
+#include <unordered_map>
+#include <iostream>
+
+using namespace Automaton;
+using namespace std;
+
+int main() {
+	DeterministicFiniteAutomaton::Symbol symbol;
+	// a unary alphabet
+	unordered_set<const DeterministicFiniteAutomaton::Symbol *> unary({&symbol});
+	DeterministicFiniteAutomaton::State sEven, sOdd;
+	unordered_map<const DeterministicFiniteAutomaton::State *, unordered_map<const DeterministicFiniteAutomaton::Symbol *, const DeterministicFiniteAutomaton::State *>> transitionFunction(
+		{
+			{&sEven, {
+				{&symbol, &sOdd},
+			}},
+			{&sOdd, {
+				{&symbol, &sEven},
+			}},
+		}
+	);
+	/**
+	 * +---------+   symbol   +------+
+	 * |         | ---------> |      |
+	 * | sEven!* |            | sOdd |
+	 * |         | <--------- |      |
+	 * +---------+   symbol   +------+
+	 *
+	 * ! accepted states
+	 * * the initial state
+	 */
+	DeterministicFiniteAutomaton evenAutomaton({&sEven, &sOdd}, unary, transitionFunction, &sEven, {&sEven});
+	// does the automaton accept a string of length 2
+	// outputs 1
+	cout << evenAutomaton.accept(basic_string<const DeterministicFiniteAutomaton::Symbol *>({&symbol, &symbol})) << endl;
+	// does the automaton accept a string of length 5
+	// outputs 0
+	cout << evenAutomaton.accept(basic_string<const DeterministicFiniteAutomaton::Symbol *>({&symbol, &symbol, &symbol, &symbol, &symbol})) << endl;
+	return 0;
+}
+```
+
+Then run in terminal:
+
+```bash
+g++ DFA_EvenLength.cpp -lautomaton -o DFA_EvenLength
+./DFA_EvenLength
+```
 
 ## Contributing
 
