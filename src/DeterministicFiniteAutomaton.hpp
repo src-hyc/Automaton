@@ -20,12 +20,13 @@ namespace Automaton {
 			const unordered_set<const Symbol *> alphabet;
 			const unordered_map<const State *, unordered_map<const Symbol *, const State *>> transitionFunction;
 			const State *initialState;
-			const unordered_set<const State *> acceptedStateSet;
+			const unordered_set<const State *> acceptStateSet;
 
 		public:
 			class State {};
 			class Symbol {};
 			DeterministicFiniteAutomaton(const unordered_set<const State *> &, const unordered_set<const Symbol *> &, const unordered_map<const State *, unordered_map<const Symbol *, const State *>> &, const State *, const unordered_set<const State *> &);
+			bool accept(const basic_string<const Symbol *> &) const noexcept;
 	};
 };
 

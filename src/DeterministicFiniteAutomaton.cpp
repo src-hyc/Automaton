@@ -51,3 +51,18 @@ DeterministicFiniteAutomaton::DeterministicFiniteAutomaton(const unordered_set<c
 		}
 	}
 }
+
+bool DeterministicFiniteAutomaton::accept(const basic_string<const Symbol *> &string) const noexcept {
+	int length = string.length();
+	const State *tokenState = this->initialState;
+	for (int i = 0; i < length; i++) {
+		if (this->transitionFunction.find(tokenState) != this->transitionFunction.end()) {
+			unordered_map<const Symbol *, const State *> symbolFunction = this->transitionFunction.at(tokenState);
+			const Symbol *symbol = string[i];
+			if (symbolFunction.find(symbol) != symbolFunction.end()) {
+				tokenState = symbolFunction.at(symbol);
+			}
+		}
+	}
+	return this->acceptStateSet.find(tokenState) != this->acceptStateSet.end();
+}
