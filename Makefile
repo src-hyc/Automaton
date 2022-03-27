@@ -8,7 +8,7 @@ INSTALL_DATA= $(INSTALL) -m 0644
 MKDIR= mkdir -p
 RM= rm -f
 
-TO_INC= *.hpp
+TO_INC= Symbol.hpp VirtualAutomaton.hpp DeterministicFiniteAutomaton.hpp
 TO_LIB= libautomaton.a
 
 default clean:
