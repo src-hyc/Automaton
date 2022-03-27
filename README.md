@@ -65,7 +65,7 @@ int main() {
 Then run in terminal:
 
 ```bash
-g++ DFA_EvenLength.cpp -lautomaton -o DFA_EvenLength
+g++ --std=c++17 -lautomaton -o DFA_EvenLength DFA_EvenLength.cpp
 ./DFA_EvenLength
 ```
 
