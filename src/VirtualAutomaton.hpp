@@ -33,6 +33,6 @@ namespace Automaton {
 			 */
 			virtual bool accept(const String &string) const = 0;
 	};
-}
+};
 
 #endif /* VIRTUAL_AUTOMATON_HPP */
