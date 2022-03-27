@@ -2,6 +2,7 @@
 #define DETERMINISTIC_AUTOMATON_HPP
 
 #include "VirtualAutomaton.hpp"
+#include "Symbol.hpp"
 
 using namespace Automaton;
 
@@ -15,7 +16,7 @@ namespace Automaton {
 			/*
 			 * the transition function of the automaton
 			 */
-			StateType transitionFunction(StateType state);
+			StateType transitionFunction(StateType, Symbol);
 
 			/**
 			 * Create a deterministic automaton with an alphabet and a transition function
@@ -23,7 +24,7 @@ namespace Automaton {
 			 * @param alphabet the alphabet of the automaton
 			 * @param transitionFunction the transition function of the automaton
 			 */
-			DeterministicAutomaton(const Alphabet &alphabet, StateType transitionFunction(StateType)) noexcept: VirtualAutomaton<StateType>(alphabet) {
+			DeterministicAutomaton(const Alphabet &alphabet, StateType transitionFunction(StateType, Symbol)) noexcept: VirtualAutomaton<StateType>(alphabet) {
 				this->transitionFunction = transitionFunction;
 			}
 	};
