@@ -1,6 +1,7 @@
 #ifndef VIRTUAL_AUTOMATON_HPP
 #define VIRTUAL_AUTOMATON_HPP
 
+#include "State.hpp"
 #include "Symbol.hpp"
 
 using namespace Automaton;
@@ -9,6 +10,7 @@ namespace Automaton {
 	/**
 	 * A virtual automaton
 	 */
+	template <typename StateType>
 	class VirtualAutomaton {
 		protected:
 			// the alphabet of the automaton
@@ -19,7 +21,8 @@ namespace Automaton {
 			 *
 			 * @param alphabet the alphabet of the automaton
 			 */
-			VirtualAutomaton(const Alphabet &alphabet) noexcept;
+			VirtualAutomaton(const Alphabet &alphabet) noexcept: alphabet(alphabet) {
+			}
 
 		public:
 			/**

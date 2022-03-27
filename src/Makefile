@@ -1,19 +1,16 @@
-LDLIBS= -lstdc++
 CXXFLAGS= --std=c++17 -O2 -Wall -Wextra
 AR= ar rcu
 RANLIB= ranlib
 
 AUTOMATON_A= libautomaton.a
 
-AUTOMATON_O= VirtualAutomaton.o DeterministicFiniteAutomaton.o
+AUTOMATON_O= DeterministicFiniteAutomaton.o
 
 default: $(AUTOMATON_A)
 
 $(AUTOMATON_A): $(AUTOMATON_O)
 	$(AR) $@ $?
 	$(RANLIB) $@
-
-VirtualAutomaton.o: VirtualAutomaton.cpp Symbol.hpp
 
 DeterministicFiniteAutomaton.o: DeterministicFiniteAutomaton.cpp Symbol.hpp VirtualAutomaton.hpp
 
