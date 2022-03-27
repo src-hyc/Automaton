@@ -1,5 +1,5 @@
 LDLIBS= -lstdc++
-CFLAGS= -O2 -Wall -Wextra
+CXXFLAGS= --std=c++17 -O2 -Wall -Wextra
 AR= ar rcu
 RANLIB= ranlib
 
