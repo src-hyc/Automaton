@@ -1,6 +1,7 @@
 #ifndef DETERMINISTIC_FINITE_AUTOMATON_HPP
 #define DETERMINISTIC_FINITE_AUTOMATON_HPP
 
+#include "State.hpp"
 #include "Symbol.hpp"
 #include "VirtualAutomaton.hpp"
 
@@ -16,7 +17,7 @@ namespace Automaton {
 	/**
 	 * A Deterministic Finite Automaton (DFA)
 	 */
-	class DeterministicFiniteAutomaton: public VirtualAutomaton {
+	class DeterministicFiniteAutomaton: public VirtualAutomaton<const State *> {
 		public:
 			/**
 			 * A state of a DFA

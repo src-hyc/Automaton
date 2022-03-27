@@ -18,7 +18,7 @@ namespace Automaton {
 			StateType transitionFunction(StateType state);
 
 			/**
-			 * Create an deterministic automaton with an alphabet and a transition function
+			 * Create a deterministic automaton with an alphabet and a transition function
 			 *
 			 * @param alphabet the alphabet of the automaton
 			 * @param transitionFunction the transition function of the automaton
