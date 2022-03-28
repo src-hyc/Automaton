@@ -40,13 +40,13 @@ const State *transitionFunction(const State *state, const Symbol *symbol) {
 
 int main() {
 	/**
-	 * +---------+   symbol   +------+
-	 * |         | ---------> |      |
-	 * | sEven!* |            | sOdd |
-	 * |         | <--------- |      |
-	 * +---------+   symbol   +------+
+	 * +---------+   s   +------+
+	 * |         | ----> |      |
+	 * | sEven!* |       | sOdd |
+	 * |         | <---- |      |
+	 * +---------+   s   +------+
 	 *
-	 * ! accepted states
+	 * ! accept states
 	 * * the initial state
 	 */
 	DeterministicFiniteAutomaton<const State *> evenAutomaton({&s}, &sEven, transitionFunction, {&sEven, &sOdd}, {&sEven});
