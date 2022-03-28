@@ -9,7 +9,7 @@ Run the following commands in terminal to install Automaton.
 ```bash
 git clone https://github.com/src-hyc/Automaton.git
 cd Automaton
-make && make install
+make install
 ```
 
 ## Usage
