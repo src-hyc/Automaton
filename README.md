@@ -26,38 +26,36 @@ Create a file `DFA_EvenLength.cpp` with content
 using namespace Automaton;
 using namespace std;
 
+Symbol s;
+State sEven, sOdd;
+
+const State *transitionFunction(const State *state, const Symbol *symbol) {
+	if (state == &sEven) {
+		return &sOdd;
+	} else if (state == &sOdd) {
+		return &sEven;
+	}
+	return state;
+}
+
 int main() {
-	DeterministicFiniteAutomaton::Symbol symbol;
-	// a unary alphabet
-	unordered_set<const DeterministicFiniteAutomaton::Symbol *> unary({&symbol});
-	DeterministicFiniteAutomaton::State sEven, sOdd;
-	unordered_map<const DeterministicFiniteAutomaton::State *, unordered_map<const DeterministicFiniteAutomaton::Symbol *, const DeterministicFiniteAutomaton::State *>> transitionFunction(
-		{
-			{&sEven, {
-				{&symbol, &sOdd},
-			}},
-			{&sOdd, {
-				{&symbol, &sEven},
-			}},
-		}
-	);
 	/**
-	 * +---------+   symbol   +------+
-	 * |         | ---------> |      |
-	 * | sEven!* |            | sOdd |
-	 * |         | <--------- |      |
-	 * +---------+   symbol   +------+
+	 * +---------+   s   +------+
+	 * |         | ----> |      |
+	 * | sEven!* |       | sOdd |
+	 * |         | <---- |      |
+	 * +---------+   s   +------+
 	 *
-	 * ! accepted states
+	 * ! accept states
 	 * * the initial state
 	 */
-	DeterministicFiniteAutomaton evenAutomaton({&sEven, &sOdd}, unary, transitionFunction, &sEven, {&sEven});
+	DeterministicFiniteAutomaton<const State *> evenAutomaton({&s}, &sEven, transitionFunction, {&sEven, &sOdd}, {&sEven});
 	// does the automaton accept a string of length 2
 	// outputs 1
-	cout << evenAutomaton.accept(basic_string<const DeterministicFiniteAutomaton::Symbol *>({&symbol, &symbol})) << endl;
+	cout << evenAutomaton.accept({&s, &s}) << endl;
 	// does the automaton accept a string of length 5
 	// outputs 0
-	cout << evenAutomaton.accept(basic_string<const DeterministicFiniteAutomaton::Symbol *>({&symbol, &symbol, &symbol, &symbol, &symbol})) << endl;
+	cout << evenAutomaton.accept({&s, &s, &s, &s, &s}) << endl;
 	return 0;
 }
 ```
@@ -65,7 +63,7 @@ int main() {
 Then run in terminal:
 
 ```bash
-g++ DFA_EvenLength.cpp -lautomaton -o DFA_EvenLength
+g++ --std=c++17 -o DFA_EvenLength DFA_EvenLength.cpp
 ./DFA_EvenLength
 ```
 
