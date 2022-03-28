@@ -25,9 +25,10 @@ namespace Automaton {
 			 * Create a finite automaton with an alphabet and a set of states
 			 *
 			 * @param alphabet the alphabet of the automaton
+			 * @param initialState the initialState of the automaton
 			 * @param stateSet the set of states of the automaton
 			 */
-			FiniteAutomaton(const Alphabet &alphabet, const unordered_set<StateType> &stateSet) noexcept: VirtualAutomaton<StateType>(alphabet), stateSet(stateSet) {
+			FiniteAutomaton(const Alphabet &alphabet, const StateType &initialState, const unordered_set<StateType> &stateSet) noexcept: VirtualAutomaton<StateType>(alphabet, initialState), stateSet(stateSet) {
 			}
 	};
 };

@@ -15,13 +15,14 @@ namespace Automaton {
 		protected:
 			// the alphabet of the automaton
 			const Alphabet alphabet;
+			const StateType initialState;
 
 			/**
 			 * Create an automaton with an alphabet
 			 *
 			 * @param alphabet the alphabet of the automaton
 			 */
-			VirtualAutomaton(const Alphabet &alphabet) noexcept: alphabet(alphabet) {
+			VirtualAutomaton(const Alphabet &alphabet, const StateType &initialState) noexcept: alphabet(alphabet), initialState(initialState) {
 			}
 
 		public:
