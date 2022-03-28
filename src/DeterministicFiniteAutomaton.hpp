@@ -8,11 +8,13 @@
 
 #include <unordered_set>
 #include <unordered_map>
+#include <functional>
 
 using namespace Automaton;
 
 using std::unordered_set;
 using std::unordered_map;
+using std::function;
 
 namespace Automaton {
 	/**
@@ -34,8 +36,9 @@ namespace Automaton {
 			 * @param stateSet states of the automaton
 			 * @param acceptStateSet accept states of the automaton
 			 */
-			DeterministicFiniteAutomaton(const Alphabet &alphabet, const StateType &initialState, StateType (*transitionFunction)(StateType, const Symbol *), const unordered_set<StateType> &stateSet, const unordered_set<StateType> &acceptStateSet): VirtualAutomaton<StateType>(alphabet, initialState), FiniteAutomaton<StateType>(alphabet, initialState, stateSet), DeterministicAutomaton<StateType>(alphabet, initialState, transitionFunction), acceptStateSet(acceptStateSet) {
+			DeterministicFiniteAutomaton(const Alphabet &alphabet, const StateType &initialState, function<StateType(StateType, const Symbol *)> transitionFunction, const unordered_set<StateType> &stateSet, const unordered_set<StateType> &acceptStateSet): VirtualAutomaton<StateType>(alphabet, initialState), FiniteAutomaton<StateType>(alphabet, initialState, stateSet), DeterministicAutomaton<StateType>(alphabet, initialState, transitionFunction), acceptStateSet(acceptStateSet) {
 			}
+
 			bool accept(const String &string) const noexcept {
 				int length = string.length();
 				StateType tokenState = this->initialState;

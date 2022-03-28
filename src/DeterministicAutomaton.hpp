@@ -4,7 +4,11 @@
 #include "VirtualAutomaton.hpp"
 #include "Symbol.hpp"
 
+#include <functional>
+
 using namespace Automaton;
+
+using std::function;
 
 namespace Automaton {
 	/**
@@ -16,7 +20,7 @@ namespace Automaton {
 			/*
 			 * the transition function of the automaton
 			 */
-			StateType (*transitionFunction)(StateType, const Symbol *);
+			function<StateType(StateType, const Symbol *)> transitionFunction;
 
 			/**
 			 * Create a deterministic automaton with an alphabet and a transition function
@@ -25,7 +29,7 @@ namespace Automaton {
 			 * @param initialState the initialState of the automaton
 			 * @param transitionFunction the transition function of the automaton
 			 */
-			DeterministicAutomaton(const Alphabet &alphabet, const StateType &initialState, StateType (*transitionFunction)(StateType, const Symbol *)) noexcept: VirtualAutomaton<StateType>(alphabet, initialState), transitionFunction(transitionFunction) {
+			DeterministicAutomaton(const Alphabet &alphabet, const StateType &initialState, function<StateType(StateType, const Symbol *)> transitionFunction) noexcept: VirtualAutomaton<StateType>(alphabet, initialState), transitionFunction(transitionFunction) {
 			}
 	};
 };
